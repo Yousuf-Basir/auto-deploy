@@ -1,0 +1,6 @@
+REPO_URL=https://github.com/interspeeddigitalsolutions/community-frontend.git
+BRANCH=main
+BUILD_COMMAND=
+RUN_COMMAND=npm run dev
+APPLICATION_PORT=3000
+ENV_FILE="D:\Projects\Bash\AutoDeployment\.env"
