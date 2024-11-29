@@ -7,10 +7,10 @@ for arg in "$@"; do
       CONFIG_FILE="${arg#*=}" # Extract value after 'conf='
       shift # Remove processed argument
       ;;
-    # env=*)
-    #   env="${arg#*=}" # Extract value after 'env='
-    #   shift # Remove processed argument
-    #   ;;
+    env=*)
+      ENV_FILE="${arg#*=}" # Extract value after 'env='
+      shift # Remove processed argument
+      ;;
     *)
       echo "Unknown argument: $arg"
       ;;

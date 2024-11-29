@@ -2,6 +2,10 @@
 
 # takes CONFIG_FILE file path from arguments. e.g bash main conf=/path/to/conf.file
 source parse_args.sh
+if [[ -z "$ENV_FILE" ]]; then
+    echo -e "${RED}env file path is required in the command argument.${NC}"
+    exit 1
+fi
 # loads config file values. REPO_URL, BRANCH, BUILD_COMMAND, RUN_COMMAND, ENV_FILE etc
 source load_config.sh 
 # get available port in AVAILABLE_PORT variable

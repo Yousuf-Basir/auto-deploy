@@ -49,16 +49,6 @@ load_config() {
             fi
         done
 
-        # Prompt for .env file path
-        while true; do
-            read -p "Enter path to .env file: " ENV_FILE
-            if [ -f "$ENV_FILE" ]; then
-                break
-            else
-                echo -e "${RED}File not found. Please provide a valid .env file path.${NC}"
-            fi
-        done
-
         # Save configuration with proper escaping
         cat > "$CONFIG_FILE" << EOL
 REPO_URL=$REPO_URL
@@ -66,7 +56,6 @@ BRANCH=$BRANCH
 BUILD_COMMAND=$BUILD_COMMAND
 RUN_COMMAND=$RUN_COMMAND
 APPLICATION_PORT=$APPLICATION_PORT
-ENV_FILE=$ENV_FILE
 EOL
 
         echo -e "${GREEN}Configuration saved to $CONFIG_FILE${NC}"
@@ -80,10 +69,6 @@ EOL
         echo -e "${RED}Error: REPO_URL is required in the configuration file.${NC}"
         exit 1
     fi
-    if [ -z "$ENV_FILE" ]; then
-        echo -e "${RED}Error: ENV_FILE is required in the configuration file.${NC}"
-        exit 1
-    fi
 }
 
 
@@ -95,7 +80,6 @@ parse_config() {
     BUILD_COMMAND=""
     RUN_COMMAND=""
     APPLICATION_PORT=""
-    ENV_FILE=""
 
     # Read config file line by line
     while IFS='=' read -r key value
@@ -123,9 +107,6 @@ parse_config() {
                 ;;
             "APPLICATION_PORT")
                 APPLICATION_PORT="$value"
-                ;;
-            "ENV_FILE")
-                ENV_FILE="$value"
                 ;;
             *)
                 echo -e "${YELLOW}Warning: Unknown configuration key '$key' ignored.${NC}"
