@@ -1,0 +1,6 @@
+REPO_URL=https://yourgitrepo.link.git
+BRANCH=main
+BUILD_COMMAND=npm run build
+RUN_COMMAND=npm start
+APPLICATION_PORT=3001
+MESSAGE={MUST ADD AN EMPTY NEW LINE AT THE END}
