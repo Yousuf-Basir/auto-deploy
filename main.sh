@@ -125,7 +125,7 @@ EOL
     # Run Docker container with host network
     echo -e "${GREEN}Starting Docker container: $CONTAINER_NAME${NC}"
     docker run -d \
-        --restart=always
+        --restart=always \
         -p "${APPLICATION_PORT}:${APPLICATION_PORT}" \
         --env-file .env \
         --name "$CONTAINER_NAME" \
