@@ -125,6 +125,8 @@ EOL
 
     echo -e "${GREEN}Deployment completed successfully!${NC}"
     echo -e "${GREEN}Application will run at port ${APPLICATION_PORT}${NC}"
+
+    docker logs --follow "$CONTAINER_NAME"
 }
 
 # Error handling

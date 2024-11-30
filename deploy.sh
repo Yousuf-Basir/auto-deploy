@@ -96,10 +96,4 @@ rm -rf "$DEPLOYMENT_PATH"
 
 ENDSSH
 
-# Check SSH command exit status
-if [[ $? -eq 0 ]]; then
-    echo "Deployment completed successfully!"
-else
-    echo "Deployment failed."
-    exit 1
-fi
+echo "Deployment process finished."
