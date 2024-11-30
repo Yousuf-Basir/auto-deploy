@@ -79,9 +79,16 @@ deploy() {
     DEPLOY_DIR=$(mktemp -d)
     cd "$DEPLOY_DIR" || exit 1
 
+    echo "Cloning at ${DEPLOY_DIR}"
     # Clone repository
     echo -e "${YELLOW}Cloning repository from $REPO_URL (Branch: $BRANCH)${NC}"
     git clone -b "$BRANCH" "$REPO_URL" .
+
+    # Remove .env file if it exists
+    if [ -f .env ]; then
+        rm .env
+        echo -e "${YELLOW}Removed .env file${NC}"
+    fi
 
     # Copy .env file
     cp "$ENV_FILE" .env
@@ -118,6 +125,7 @@ EOL
     # Run Docker container with host network
     echo -e "${GREEN}Starting Docker container: $CONTAINER_NAME${NC}"
     docker run -d \
+        --restart=always
         -p "${APPLICATION_PORT}:${APPLICATION_PORT}" \
         --env-file .env \
         --name "$CONTAINER_NAME" \
@@ -137,10 +145,10 @@ trap 'echo -e "${RED}Deployment failed. Check the error messages above.${NC}"' E
 deploy
 
 # Final cleanup function
-final_cleanup() {
-    echo -e "${YELLOW}Cleaning up temporary files...${NC}"
-    rm -rf "$DEPLOY_DIR"
-}
+# final_cleanup() {
+#     echo -e "${YELLOW}Cleaning up temporary files...${NC}"
+#     rm -rf "$DEPLOY_DIR"
+# }
 
 # Register final cleanup to run on script exit
 trap final_cleanup EXIT
