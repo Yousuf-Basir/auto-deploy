@@ -25,6 +25,7 @@ PORT=3001  # Must be the same as APPLICATION_PORT
 ```
 
 ### Deployment Command
+cd into the directory containing `deploy.sh` and run the following command:
 ```bash
 ./deploy.sh username@server_ip config_file env_file
 ```
